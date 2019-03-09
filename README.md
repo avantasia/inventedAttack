@@ -1,11 +1,9 @@
 ###
 # inventedAttack.py - A POC attack combining IP SPoofing, SYN Flood and IP Fragmentation
-# I only made this to feed my own curiosity (and for a classroom homework too tbh) 
-# since it's not very effective nowadays, but feel free to use it!
-#
-#
-# David Carracedo Martinez - dcarracedom@uoc.edu 2019
 ##
+I only made this to feed my own curiosity (and for a classroom homework too tbh) since it's not very effective nowadays, but feel free to use it!
+
+David Carracedo Martinez - dcarracedom@uoc.edu 2019
 
 I actually tried it on some machines and it had 0 impact, probably because
 the base of the attack (SYN Flood) was effective when resources were scarcer 
