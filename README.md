@@ -11,7 +11,9 @@ and the was no SYN Flood protection builtin in the kernel.
 If you want to play around the idea anyways take a look at
 
 /proc/sys/net/ipv4/tcp_syncookies
+
 /proc/sys/net/ipv4/tcp_max_syn_backlog
+
 /proc/sys/net/ipv4/tcp_synack_retries
 
 The fragmentation part makes no difference either.
