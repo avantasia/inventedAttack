@@ -16,6 +16,12 @@ If you want to play around the idea anyways take a look at
 /proc/sys/net/ipv4/tcp_max_syn_backlog
 /proc/sys/net/ipv4/tcp_synack_retries
 
+If you want to monitor the half-open connections on the server you can try
+
+netstat -tuna | grep :443 | grep SYN_RECV
+
+Change 443 for whatever port you are using, also you can pipe again | wc -l to count the number of connections made, in my tests they stay in the range of 50-100.
+
 The fragmentation part makes no difference either.
 
 About the source IP spoofing I found it was the most effective part since 

