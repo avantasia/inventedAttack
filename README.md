@@ -1,11 +1,9 @@
 ###
 # inventedAttack.py - A POC attack combining IP SPoofing, SYN Flood and IP Fragmentation
-# I only made this to feed my own curiosity (and for a classroom homework too tbh) 
-# since it's not very effective nowadays, but feel free to use it!
-#
-#
-# David Carracedo Martinez - dcarracedom@uoc.edu 2019
 ##
+I only made this to feed my own curiosity (and for a classroom homework too tbh) since it's not very effective nowadays, but feel free to use it!
+
+David Carracedo Martinez - dcarracedom@uoc.edu 2019
 
 I actually tried it on some machines and it had 0 impact, probably because
 the base of the attack (SYN Flood) was effective when resources were scarcer 
@@ -13,7 +11,9 @@ and the was no SYN Flood protection builtin in the kernel.
 If you want to play around the idea anyways take a look at
 
 /proc/sys/net/ipv4/tcp_syncookies
+
 /proc/sys/net/ipv4/tcp_max_syn_backlog
+
 /proc/sys/net/ipv4/tcp_synack_retries
 
 If you want to monitor the half-open connections on the server you can try
