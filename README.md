@@ -52,9 +52,9 @@ kind flooded the DNS with them.
 Lessons learned : turn off reverse DNS resolution in your services. 
 
 Things I might improve:
-- [x] Write this in Python 3 (I actually don't know why I was sing python 2, the only incompatible function was a print!)
-- [ ] Use Python 3 async, see how performance improves
-- [x] More configurable parameters (fragment size, threads)
+- [x] ~~Write this in Python 3 (I actually don't know why I was sing python 2, the only incompatible function was a print!)~~
+- [x] ~~Use Python 3 async, see how performance improves~~ Asyncio makes no difference at all, but I'm leaving anyways a branch here https://github.com/avantasia/inventedAttack/tree/async for testing purposes (and to remind me the next time)
+- [x] ~~More configurable parameters (fragment size, threads)~~
 - [ ] Tests with WAF/IDS and fragmentation on target machine
 - [ ] Performance graphs on target machine
 - [ ] Maybe dockerize both this and target machine
