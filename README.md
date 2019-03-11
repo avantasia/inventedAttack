@@ -9,9 +9,18 @@ pip install -r requirements.txt
 ```
 to install the required dependencies
 ```
-./inventedAttack.py <Target IP> <Target port> 
+Usage: inventedAttack.py [OPTIONS]
+
+Options:
+  -i, --ip TEXT          IP address of the target machine
+  -p, --port INTEGER     Port of the service to attack with SYN Flood
+  -t, --threads INTEGER  Number of concurrent threads
+  -s, --size INTEGER     Fragment size
+  --help                 Show this message and exit.
+
 ```
-tun run the attack
+
+If you don't pass any of the parameters, the script will ask for them with an interactive prompt
 
 I actually tried it on some machines and it had 0 impact, probably because
 the base of the attack (SYN Flood) was effective when resources were scarcer 
@@ -44,7 +53,7 @@ Lessons learned : turn off reverse DNS resolution in your services.
 Things I might improve:
 - [ ] Write this in Python 3 (I actually don't know why I'm using python 2 anyways..)
 - [ ] Use Python 3 async, see how performance improves
-- [ ] More configurable parameters (fragment size, threads)
+- [x] More configurable parameters (fragment size, threads)
 - [ ] Tests with WAF/IDS and fragmentation on target machine
 - [ ] Performance graphs on target machine
 - [ ] Maybe dockerize both this and target machine
