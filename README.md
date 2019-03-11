@@ -3,6 +3,17 @@
 ##
 I only made this to feed my own curiosity (and for a classroom homework too tbh) since it's not very effective nowadays, but feel free to use it!
 
+To use it run
+
+pip install -r requirements.txt 
+
+to install the required dependencies
+
+./inventedAttack.py <Target IP> <Target port> 
+
+tun run the attack
+
+
 David Carracedo Martinez - dcarracedom@uoc.edu 2019
 
 I actually tried it on some machines and it had 0 impact, probably because

